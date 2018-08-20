@@ -1,0 +1,197 @@
+import java.awt.*;
+import java.awt.font.*;
+import java.awt.geom.*;
+import java.awt.image.BufferedImage;
+import java.text.*;
+import java.util.*;
+import java.util.List; // resolves problem with java.awt.List and java.util.List
+
+/**
+ * A class that represents a picture.  This class inherits from 
+ * SimplePicture and allows the student to add functionality to
+ * the Picture class.  
+ * 
+ * Copyright Georgia Institute of Technology 2004-2005
+ * @author Barbara Ericson ericson@cc.gatech.edu
+ */
+public class Picture extends SimplePicture 
+{
+  ///////////////////// constructors //////////////////////////////////
+  
+  /**
+   * Constructor that takes no arguments 
+   */
+  public Picture ()
+  {
+    /* not needed but use it to show students the implicit call to super()
+     * child constructors always call a parent constructor 
+     */
+    super();  
+  }
+  
+  /**
+   * Constructor that takes a file name and creates the picture 
+   * @param fileName the name of the file to create the picture from
+   */
+  public Picture(String fileName)
+  {
+    // let the parent class handle this fileName
+    super(fileName);
+  }
+  
+  /**
+   * Constructor that takes the width and height
+   * @param width the width of the desired picture
+   * @param height the height of the desired picture
+   */
+  public Picture(int width, int height)
+  {
+    // let the parent class handle this width and height
+    super(width,height);
+  }
+  
+  /**
+   * Constructor that takes a picture and creates a 
+   * copy of that picture
+   */
+  public Picture(Picture copyPicture)
+  {
+    // let the parent class do the copy
+    super(copyPicture);
+  }
+  
+  /**
+   * Constructor that takes a buffered image
+   * @param image the buffered image to use
+   */
+  public Picture(BufferedImage image)
+  {
+    super(image);
+  }
+  
+  ////////////////////// methods ///////////////////////////////////////
+  
+  /**
+   * Method to return a string with information about this picture.
+   * @return a string with information about the picture such as fileName,
+   * height and width.
+   */
+  public String toString()
+  {
+    String output = "Picture, filename " + getFileName() + 
+      " height " + getHeight() 
+      + " width " + getWidth();
+    return output;
+    
+  }
+  
+   /*
+    * Subtract the given values from the appropriate colors.
+    * Input: rSub - the amount that should be subtracted from the original red value
+    *        gSub - the amount that should be subtracted from the original green value
+    *        bSub - the amount that should be subtracted from the original blue value
+    * Returns: nothing
+    */
+    public void subtractColor(int rSub, int gSub, int bSub)
+    {
+      Pixel[] pixelArray = this.getPixels(); //method to decrease red green blue value for picture
+      Pixel pixel = null;
+      int index = 0;
+      int value = 0;
+      while (index < pixelArray.length)//loop through all the pixels
+      {
+        pixel = pixelArray[index];//set current pixels
+        index++;//index increase by 1 each loop
+        
+        value = pixel.getRed();//get red value
+        pixel.setRed(value - rSub);//decrease the red value by rSub
+        
+        value = pixel.getGreen();//get green value
+        pixel.setGreen(value - gSub);//decrease the green value by gSub
+        
+        value = pixel.getBlue();//get blue value
+        pixel.setBlue(value - bSub);//decrease the blue value by bSub
+      }
+        
+    }
+  
+
+   /*
+    * Create the negative of each pixel between the provided indices
+    * Input: start - the index of the first pixel to be modified (inclusive)
+    * end - the index of the last pixel to be modified (inclusive)
+    * Returns: nothing
+    */
+    public void negative()
+    {
+      Pixel[] pixelArray = this.getPixels(); //method to decrease red green blue value for picture
+      Pixel pixel = null;
+      int index = 0;
+      int value = 0; 
+      int start = 0;
+      index = start;
+      int end = pixelArray.length;
+      
+      while( index < end )
+      {
+        pixel = pixelArray[index];
+        index++;
+        
+        value = pixel.getRed();//get red value
+        pixel.setRed(255 - value);//set the new red value equal to 255 - old value
+        
+        value = pixel.getGreen();//get green value
+        pixel.setGreen(255 - value); //set the new green value equal to 255 - old value
+        
+        value = pixel.getBlue();//get blue value
+        pixel.setBlue(255 - value); //set the new blue value equal to 255 - old value
+      }
+    }
+
+   /*
+    * Create the grayscale of each pixel between the provided indices
+    * Input: start - the index of the first pixel to be modified (inclusive)
+    *        end - the index of the last pixel to be modified (inclusive)
+    * Returns: nothing
+    */
+    public void grayscale()
+    {
+      Pixel[] pixelArray = this.getPixels(); //method to decrease red green blue value for picture
+      Pixel pixel = null;
+      int index = 0;
+      int value = 0; 
+      int start = 0;
+      index = start;
+      int end = pixelArray.length;
+      
+      while( index < end )
+      {
+        pixel = pixelArray[index];
+        index++;
+        
+        value = ( pixel.getRed() + pixel.getGreen() + pixel.getBlue()) / 3; //all up reb green blue value and divide by 3 to get a average value
+        
+        pixel.setRed(value);//set the new red value 
+        
+        pixel.setGreen(value); //set the new green value 
+        
+        pixel.setBlue(value); //set the new blue value 
+      }
+    }
+    
+
+    /*
+     * Apply myFilter to each pixel between the provided indices
+     * ADD A SHORT DESCRIPTION OF YOUR FILTER HERE
+     * Input: start - the index of the first pixel to be modified (inclusive)
+     *        end - the index of the last pixel to be modified (inclusive)
+     * Returns: nothing
+     */
+     public void myFilter(int start, int end)
+     {
+          //fill in
+     }
+     
+  
+} // this } is the end of class Picture, put all new methods before this
+ 
